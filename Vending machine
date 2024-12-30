@@ -1,0 +1,106 @@
+# Vending Machine Application
+products = {
+    'A1': {'name': 'Coffee', 'price': 20, 'stock' : 5, 'category': 'Hot Drink'},
+    'A2': {'name': 'Tea', 'price': 3, 'stock': 3, 'category': 'Hot Drink'},
+    'A3': {'name': 'Milk Tea', 'price': 35, 'stock': 4, 'category': 'Cold Drink'},
+    'A4': {'name': 'Juice', 'price': 12, 'stock': 2, 'category': 'Cold Drink'},
+    'A5': {'name': 'Water', 'price': 1, 'stock': 6, 'category': 'Cold Drink'},
+    'B1': {'name': 'Chips', 'price': 10, 'stock': 6, 'category': 'Snack'},
+    'B2': {'name': 'Chocolate', 'price': 12, 'stock': 3, 'category': 'Snack'},
+    'B3': {'name': 'Biscuits', 'price': 100, 'stock': 4, 'category': 'Snack'},
+    'B4': {'name': 'Candy Bar', 'price': 25, 'stock': 5, 'category': 'Snack'},
+    'B5': {'name': 'Pretzels', 'price': 20, 'stock': 6, 'category': 'Snack'}
+}
+
+# Display the vending machine menu
+def display_menu():
+    print("\n--- Vending Machine Menu ---")
+    categories = {}
+    for code , item in products.items():
+        category = item['category']
+        if category not in categories:
+            categories[category] = []
+        categories[category].append(f"{code}: {item['name']} - AED{item['price']} ({item['stock']} left)")
+
+    # Display the items by catefory
+    for category, items in categories.items(): 
+        print(f"\n{category}:")
+        for item in items:
+            print(f"  {item}")
+
+# Asking  how to pay   input (both cash and card)
+def insert_money():
+    while True:
+        payment_method = input("\nWould you like to pay by card or cash? (card/cash): ").lower()
+        if payment_method == 'cash':
+            try:
+                amount = float(input("\nInsert cash (e.g., 200): AED"))
+                if amount <=0:
+                    print("Please insert a positive amount.") # They print the positive amount
+                    continue
+                return amount  # Returning the balance
+            except ValueError:
+                print("Invalid input. Please enter a valid amount.") 
+        elif payment_method == 'card'or 'card':
+            print("Card payment simulated. Balance set to AED200.00.")
+            return 100.00   
+        else:
+            print("Invalid option. Please enter 'cash' or 'card'.")
+
+# Select the item you want
+def select_product(balance):
+    while True:
+        code = input("\nEnter the code of the item you want to buy: ").upper()
+        if code not in products:
+            print("Incorrect code. Please try again.")
+            continue
+
+        item = products[code]
+        if item['stock'] == 2: 
+            print(f"Sorry, {item['name']} is out of stock.")
+            continue
+
+        if balance < item['price']:
+            print(f"Insufficient funds. {item['name']} costs AED{item['price']:.2f}.")
+            return balance  # Allow to insert more money or choose another item
+
+        # Pruchase complete
+        item['stock'] -= 1  # Reduce stock
+        balance -= item['price']
+        print(f"\nDispensing {item['name']}... Enjoy!")
+        print(f"Remaining balance: AED{balance:.2f}")
+
+        # Suggest complementary items 
+        suggest_complementary_item(item['category']) 
+
+        return balance  # Update the turning balance
+
+# Suggest to complementary items based on the category
+def suggest_complementary_item(category): 
+    suggestions = {
+        'Hot Drink': 'Would you like some biscuits with your hot drink?',
+        'Cold Drink': 'Try some chips with your cold drink!',
+        'Snack': 'How about a refreshing soda with your snack?'
+        'You want some more?'
+    }
+    print(suggestions.get(category, "")) 
+
+# Vending machine to run the main loop
+def main():
+    print("Welcome to the Vending Machine!")
+    balance = 0 # Returning the balance
+
+    while True:
+        display_menu()  # Show this menu
+        balance += insert_money()  #  Add money to balance
+        balance = select_product(balance)  # Process purchase
+
+        # Return change and exit or allow additional purchase
+        if balance > 0:
+            print(f"Returning change: AED{balance:.2f}")
+        if input("\nWould you like to buy another item? (yes/no): ").lower() != 'yes':
+            print("Thank you for using the vending machine!")
+            break  # Exit the loop if user chooss not to countinue
+
+# Run the vending machine program
+main()
