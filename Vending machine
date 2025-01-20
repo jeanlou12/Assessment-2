@@ -42,7 +42,7 @@ def insert_money():
             except ValueError:
                 print("Invalid input. Please enter a valid amount.") 
         elif payment_method == 'card'or 'card':
-            print("Card payment simulated. Balance set to AED200.00.")
+            print("Card payment simulated. Balance set to AED100.00.")
             return 100.00   
         else:
             print("Invalid option. Please enter 'cash' or 'card'.")
