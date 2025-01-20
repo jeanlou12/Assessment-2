@@ -7,7 +7,7 @@ products = {
     'A5': {'name': 'Water', 'price': 1, 'stock': 6, 'category': 'Cold Drink'},
     'B1': {'name': 'Chips', 'price': 10, 'stock': 6, 'category': 'Snack'},
     'B2': {'name': 'Chocolate', 'price': 12, 'stock': 3, 'category': 'Snack'},
-    'B3': {'name': 'Biscuits', 'price': 100, 'stock': 4, 'category': 'Snack'},
+    'B3': {'name': 'Biscuits', 'price': 10, 'stock': 4, 'category': 'Snack'},
     'B4': {'name': 'Candy Bar', 'price': 25, 'stock': 5, 'category': 'Snack'},
     'B5': {'name': 'Pretzels', 'price': 20, 'stock': 6, 'category': 'Snack'}
 }
