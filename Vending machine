@@ -34,7 +34,7 @@ def insert_money():
         payment_method = input("\nWould you like to pay by card or cash? (card/cash): ").lower()
         if payment_method == 'cash':
             try:
-                amount = float(input("\nInsert cash (e.g., 200): AED"))
+                amount = float(input("\nInsert cash (e.g., 500): AED"))
                 if amount <=0:
                     print("Please insert a positive amount.") # They print the positive amount
                     continue
@@ -42,7 +42,7 @@ def insert_money():
             except ValueError:
                 print("Invalid input. Please enter a valid amount.") 
         elif payment_method == 'card'or 'card':
-            print("Card payment simulated. Balance set to AED100.00.")
+            print("Card payment simulated. Balance set to AED500.00.")
             return 100.00   
         else:
             print("Invalid option. Please enter 'cash' or 'card'.")
